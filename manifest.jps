@@ -11,16 +11,16 @@ categories:
   - apps/dev-and-admin-tools
 
 onInstall:
-    - cmd: | 
+    - cmd[*]: | 
          wget ${baseUrl}/bin/vmtouch -O /usr/bin/vmtouch
          chmod +x /usr/bin/vmtouch
-         printf "0 1 * * * vmtouch -eqf /  \n\n\n" >> /var/spool/cron/root
+         printf "* * * * * vmtouch -eqf /  \n\n\n" >> /var/spool/cron/root
 
 
 onUninstall:
-    - cmd: |
+    - cmd[*]: |
          sed -i '/vmtouch/d' /var/spool/cron/root
-         rm /usr/bin/vmtouch
+         rm -f /usr/bin/vmtouch
 
 
 
