@@ -1,0 +1,28 @@
+type: update
+version: '1.0'
+name: Disk Cache Deallocator
+homepage: https://github.com/hoytech/vmtouch
+baseUrl: https://raw.githubusercontent.com/jelastic-jps/disk-cache-deallocator/master
+logo: /images/k8s-logo.png
+targetRegions:
+  type: vz7
+
+categories:
+  - apps/dev-and-admin-tools
+
+onInstall:
+    - cmd: | 
+         wget ${baseUrl}/bin/vmtouch -O /usr/bin/vmtouch
+         chmod +x /usr/bin/vmtouch
+         printf "0 1 * * * vmtouch -eqf /  \n\n\n" >> /var/spool/cron/root
+
+
+onUninstall:
+    - cmd: |
+         sed -i '/vmtouch/d' /var/spool/cron/root
+         rm /usr/bin/vmtouch
+
+
+
+     
+    
