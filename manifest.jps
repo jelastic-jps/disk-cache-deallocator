@@ -11,11 +11,11 @@ categories:
   - apps/dev-and-admin-tools
 
 onInstall:
-    - cmd[*]: | 
+    - cmd[*]: |-
          wget ${baseUrl}/bin/vmtouch -O /usr/bin/vmtouch
          chmod +x /usr/bin/vmtouch
-         echo "* * * * * vmtouch -eqf /  " >> /var/spool/cron/root
-         echo >> /var/spool/cron/root
+         printf "* * * * * vmtouch -eqf /  \n\n\n" >> /var/spool/cron/root
+         
 
 
 onUninstall:
